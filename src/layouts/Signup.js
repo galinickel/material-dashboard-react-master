@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { userService } from "../services/user.service";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -75,7 +76,7 @@ export default function Signup({ ...rest }) {
   };
   const onSubmit = ev => {
     ev.preventDefault();
-    return {
+    userService.signup({
       username,
       password,
       email,
@@ -85,7 +86,7 @@ export default function Signup({ ...rest }) {
       country,
       postalcode,
       about
-    };
+    });
   };
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {

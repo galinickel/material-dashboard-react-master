@@ -46,6 +46,8 @@ export default function Login({ ...rest }) {
   const [image] = React.useState(bgImage);
   const [color] = React.useState("blue");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -57,6 +59,13 @@ export default function Login({ ...rest }) {
     if (window.innerWidth >= 960) {
       setMobileOpen(false);
     }
+  };
+  const onSubmit = ev => {
+    ev.preventDefault();
+    return {
+      username,
+      password
+    };
   };
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
@@ -91,18 +100,20 @@ export default function Login({ ...rest }) {
       <div className={classes.mainPanel} ref={mainPanel}>
         <div className="login-form">
           <h2>Login</h2>
-          <form className={classes.root}>
+          <form className={classes.root} onSubmit={onSubmit}>
             <label>Username</label>
-            <TextField />
+            <TextField onChange={ev => setUsername(ev.target.value)} />
             <label>Password</label>
-            <TextField type="password" />
+            <TextField
+              type="password"
+              onChange={ev => setPassword(ev.target.value)}
+            />
             <Button round color="primary">
               Login
             </Button>
           </form>
           <p>Not a member? Sign Up</p>
         </div>
-        {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
         {getRoute() ? (
           <div className={classes.content}>
             <div className={classes.container}>{switchRoutes}</div>
