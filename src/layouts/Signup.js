@@ -76,7 +76,7 @@ export default function Signup({ ...rest }) {
   };
   const onSubmit = ev => {
     ev.preventDefault();
-    userService.signup({
+    return userService.signup({
       username,
       password,
       email,

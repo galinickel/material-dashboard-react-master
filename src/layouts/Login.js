@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { userService } from "../services/user.service";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -62,10 +63,10 @@ export default function Login({ ...rest }) {
   };
   const onSubmit = ev => {
     ev.preventDefault();
-    return {
+    return userService.login({
       username,
       password
-    };
+    });
   };
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
@@ -108,7 +109,7 @@ export default function Login({ ...rest }) {
               type="password"
               onChange={ev => setPassword(ev.target.value)}
             />
-            <Button round color="primary">
+            <Button type="submit" round color="primary">
               Login
             </Button>
           </form>
